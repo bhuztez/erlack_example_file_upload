@@ -1,0 +1,58 @@
+{
+    "v": "4.0",
+    "workspace": {
+        "name": "erlack_example_file_upload",
+        "links": [],
+        "commands": [
+            {
+                "name": "Debug Server",
+                "type": "custom",
+                "commandLine": "cd ${current.project.path}\nrebar3 compile\nerl -env ERL_LIBS _build/default/lib -s erlack_example_file_upload -noinput\n",
+                "attributes": {
+                    "goal": "Run",
+                    "previewUrl": "http://${server.port.8000}/"
+                }
+            }
+        ],
+        "projects": [
+            {
+                "name": "erlack_example_file_upload",
+                "type": "blank",
+                "description": "Erlack Example File Upload",
+                "path": "/erlack_example_file_upload",
+                "source": {
+                    "type": "git",
+                    "location": "git://github.com/bhuztez/erlack_example_file_upload.git",
+                    "parameters": {}
+                },
+                "mixins": [],
+                "attributes": {},
+                "modules": []
+            }
+        ],
+        "defaultEnv": "default",
+        "environments": {
+            "default": {
+                "recipe": {
+                    "content": "FROM eclipse/stack-base:debian\nRUN sudo apt-get update -y && sudo apt-get -t jessie-backports install -y erlang-nox && sudo wget -O /usr/bin/rebar3 https://s3.amazonaws.com/rebar3/rebar3 && sudo chmod a+x /usr/bin/rebar3\nEXPOSE 8000\n",
+                    "type":"dockerfile",
+                    "contentType": "text/x-dockerfile"
+                },
+                "machines": {
+                    "dev-machine": {
+                        "servers": {},
+                        "agents": [
+                            "org.eclipse.che.terminal",
+                            "org.eclipse.che.ws-agent",
+                            "org.eclipse.che.ssh",
+                            "org.eclipse.che.exec"
+                        ],
+                        "attributes": {
+                            "memoryLimitBytes": "2147483648"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

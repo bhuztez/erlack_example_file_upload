@@ -1,0 +1,14 @@
+{application, erlack_example_file_upload,
+ [{description, "Erlack Example File Upload"},
+  {vsn, "0.0.1"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib,
+    ecgi,
+    erlack
+   ]},
+  {env,[]},
+  {modules, []},
+  {licenses, ["Apache 2.0"]}
+ ]}.
